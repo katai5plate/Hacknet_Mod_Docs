@@ -156,28 +156,80 @@ Hacknetのコンピュータはそれぞれ、単一のXMLファイルで定義�
 <ports>21, 22, 25, 80, 1433, 104, 6881, 443, 192, 554</ports>
 ```
 
-|番号|説明|対応|ワイルドカード|
-|-|-|-|-|
-|21|FTP protocols|FTPBounce<br/>FTPSprint|#FTP_CRACK#<br/>#FTP_FAST_EXE#|
-|22|SSH protocols|SSHcrack|#SSH_CRACK#|
-|25|SMTP protocols|SMTPoverflow|#SMTP_CRACK#|
-|80|HTTP WebServer|WebServerWorm|#WEB_CRACK#|
-|1433|SQL Server|SQL_MemCorrupt<br/>SQLBufferOverflow|#SQL_CRACK#|
-|104|Medical Services|KBT_PortTest<br/>KBTPortTest|#MEDICAL_PROGRAM#|
-|6881|BitTorrent|TorrentStreamInjector<br/>trnt|#TORRENT_EXE#|
-|443|HTTPS (SSL)|SSLTrojan<br/>WIP_SSLTrojan|#SSL_EXE#|
-|192|Pacific Dedicated|PacificPortcrusher|#PACIFIC_EXE#|
-|554|RTSP|RTSPCrack|#RTSP_EXE#|
+|番号|再設定用<br/>略称|説明|対応|ワイルドカード|
+|-|-|-|-|-|
+|21|ftp|FTP protocols|FTPBounce<br/>FTPSprint|#FTP_CRACK#<br/>#FTP_FAST_EXE#|
+|22|ssh|SSH protocols|SSHcrack|#SSH_CRACK#|
+|25|smtp|SMTP protocols|SMTPoverflow|#SMTP_CRACK#|
+|80|web|HTTP WebServer|WebServerWorm|#WEB_CRACK#|
+|1433|sql|SQL Server|SQL_MemCorrupt<br/>SQLBufferOverflow|#SQL_CRACK#|
+|104|medical|Medical Services|KBT_PortTest<br/>KBTPortTest|#MEDICAL_PROGRAM#|
+|6881|torrent|BitTorrent|TorrentStreamInjector<br/>trnt|#TORRENT_EXE#|
+|443||HTTPS (SSL)|SSLTrojan<br/>WIP_SSLTrojan|#SSL_EXE#|
+|192||Pacific Dedicated|PacificPortcrusher|#PACIFIC_EXE#|
+|554||RTSP|RTSPCrack|#RTSP_EXE#|
 
+#### 任意のポート番号に変更する
 
+左辺は上の表の略称でも、ポート番号でも構いません。
 
+```xml
+<portRemap>web=1234,22=2</portRemap>
+```
 
+### プロキシ
 
+- `time`: 打開にかかる時間を`30 * time`秒に設定します。
+- 無効にする場合は`time="-1"`を設定します。
 
+```xml
+<proxy time="2" />
+```
 
+### PortHackに必要なポート数
 
+- `val`: ポート数
+- 100以上の場合、`INVIOLABILITY ERROR`を表示します。
 
+```xml
+<portsForCrack val="0" />
+```
 
+### ファイアウォール
+
+- `level`: 解決に必要な回数
+- `solution`: 回答、
+- `additionalTime`: ステップあたりの遅延時間
+- 無効にする場合は`level="-1"`を設定します。
+
+```xml
+<firewall level="6" solution="Scypio" additionalTime="1.0"/>
+```
+
+### 自動修復
+
+disconnectした直後、自動でポートとスタッフをリセットします。
+
+- `type`:
+  + `basic`: 15秒ほどでリセット
+  + `progress`: 管理者権限未掌握の場合、ポート・ファイアウォール・プロキシの進捗をリセットする
+  + `fast`: リセットされるまでの間隔が短い
+  + `none`: 無効にする
+- `resetPassword`: パスワードをリセットするか
+- `isSuper`: fastモードで間髪入れずパスワードをリセットするか
+
+```xml
+<admin type="fast" resetPassword="false" isSuper="false"/>
+```
+
+### パッシブトレース
+
+侵入ログが残存した状態でdisconnectすると、
+ハッカーに逆探知され、リセット攻撃を仕掛けて来るようにします。
+
+```xml
+<tracker />
+```
 
 
 
