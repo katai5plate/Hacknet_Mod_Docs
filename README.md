@@ -331,7 +331,7 @@ scanしたとき、他のコンピュータを追加するようにします。
 
 - `RTSPCrack`: ポート554を解除
 - `ESequencer`: `ExtensionInfo.xml`によってカスタマイズ可能なプログラム
-- `OpShell`: 現在のシェル設定を保存し、あとで再展開。`-s``-o`のオプション。
+- `OpShell`: 現在のシェル設定を保存し、あとで再展開。`-s`,`-o`のオプション。
 
 ```xml
 <file path="bin" name="RTSPCrack.exe">#RTSP_EXE#</file>
@@ -351,11 +351,163 @@ scanしたとき、他のコンピュータを追加するようにします。
 <file path="sys" name="Mint-Theme.sys">#MINT_THEME#</file>
 ```
 
+#### カスタムテーマ
 
+```xml
+<customthemefile path="sys" name="Custom_x-server.sys" themePath="Themes/TestTheme2.xml"/>
+```
 
+#### 暗号化ファイル
 
+`DECHead.exe`でトレースし、`Decypher.exe`で復号することができます。
 
+```xml
+<encryptedFile path="home" name="encrypted_File.dec" extension=".txt" ip="192.168.1.1" header="This is the header" pass="decryptionPassword">
+    This generates an encrypted file that can be decrypted using the password above. It decrypts to have the extension .txt
+  </encryptedFile>
 
+  <encryptedFile path="home" name="easy_encrypted_File.dec" ip="192.168.1.1" header="This is the header">
+    By simply not providing a password like this one, it can be decrypted without a password
+  </encryptedFile>
+  
+  <encryptedFile path="home" name="asdf2.dec" ip="192.168.1.1" header="This is the header" pass="password">
+    This is an encrypted file referenced in ExampleMission.xml
+  </encryptedFile>
+```
+
+### デーモン
+
+ノード上で実行されるプログラムです。
+
+一般的にはノードごとに単一のデーモンだけ使用するのがベストですが、
+好きなだけ追加することができます。
+
+#### データベース
+
+##### 死刑囚
+
+事前設定されたレコードのコレクションをロードします。
+
+```xml
+<deathRowDatabase />
+```
+
+##### 大学
+
+`People.All`から引き出されます。
+
+```xml
+<academicDatabase />
+```
+
+##### 医療
+
+`People.All`から引き出されます。
+
+```xml
+<MedicalDatabase />
+```
+
+##### ポイントクリッカーゲーム
+
+`People.All`から引き出されます。
+
+```xml
+<PointClicker />
+```
+
+#### ISP
+```xml
+<ispSystem />
+```
+
+#### アップローダー
+```xml
+<uploadServerDaemon name="Upload Dropbox" folder="Drop" 
+                      needsAuth="false" color="204,116,212"/>
+```
+
+#### WEBサーバー(HTML)
+```xml
+<addWebServer name="Website Server" url="Web/ExampleWebsite/ExampleWebsite.html" />
+```
+
+#### 掲示板
+```xml
+<messageBoard name="Custom Board Name!">
+    <thread>Docs/MessageBoardThreads/ExampleThread1.txt</thread>
+    <thread>Docs/MessageBoardThreads/ExampleThread2.txt</thread>
+</messageBoard>
+```
+
+#### メールサーバー
+```xml
+<mailServer name="Example Mail Server" color="50,237,212" generateJunk="true">
+    <email recipient="mailGuy" sender="Sender Guy" subject="Adding an email!">
+This is how you add emails to the mail server - logging in with someone's account
+will show these just like the way the player gets emails.
+    </email>
+    <email recipient="mailGuy" sender="Spam" subject="amazing features">
+You can have as many of these as you want
+    </email>
+    <email recipient="Matt" sender="Spam" subject="re: amazing features">
+Different users too
+    </email>
+<email recipient="Matt" sender="Spam" subject="re: re: amazing features">
+The generateJunk flag will specify if this server will generate junk emails for non-player accounts on it.
+    </email>
+  </mailServer>
+```
+
+#### ペースメーカー
+- `patient`: 患者名。死亡している場合は`DEAD`。
+
+警告: 実在の人間を殺す表現のためにこれを使用しないでください。
+
+```xml
+<HeartMonitor patient="J_Stalvern"/>
+```
+
+#### BGMチェンジャー
+```xml
+<SongChangerDaemon />
+```
+
+#### 一覧ページ
+
+エントロピーのミッション一覧や、SlashBotのようなニュース記事を表示します。
+
+```xml
+<variableMissionListingServer name="example listing server" iconPath="Logo.png" articleFolderPath="Docs/ListingServerArticles" color="120,200,2" assigner="false" public="true" title="This is the rendered title of the server" />
+```
+
+CSEC風:
+
+```xml
+<missionHubServer groupName="ExTech" serviceName="Example Tech Contract Hub" missionFolderPath="Missions/Misc" themeColor="200,10,10" lineColor="255,80,80" backgroundColor="20,20,20" allowAbandon="false"/>
+```
+
+#### クレジット
+
+クレジット用に保存されたファイルをロードします。
+
+```xml
+<CreditsDaemon Title="intro Extension Ending Credits" ButtonText="Complete" ConditionalActionSetToRunOnButtonPressPath="Actions/CreditsRunActions.xml"/>
+```
+
+#### FastActionHost (翻訳中)
+
+An optimized Action host daemon
+
+this daemon does nothing except host delayable actions
+
+but it is much more efficient at doing that than other servers.
+
+If you have lots of actions looping or in delay at once (more than 50, say) it might be worth moving them to be delay hosted on one of these if you encounter performance issues.
+
+If you're going to use this, make sure this tag is the first one under the <Computer> tag!
+          
+          
 
 
 
