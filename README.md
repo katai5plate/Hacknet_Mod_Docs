@@ -156,11 +156,7 @@ Hacknetのコンピュータはそれぞれ、単一のXMLファイルで定義�
 <ports>21, 22, 25, 80, 1433, 104, 6881, 443, 192, 554</ports>
 ```
 
-|番号|port<br/>Remap<br/>用```xml
-<file path="bin" name="RTSPCrack.exe">#RTSP_EXE#</file>
-<file path="bin" name="ESequencer.exe">#EXT_SEQUENCER_EXE#</file>
-<file path="bin" name="OpShell.exe">#SHELL_OPENER_EXE#</file>
-```略称|説明|対応|ワイルドカード|
+|番号|port<br/>Remap<br/>用略称|説明|対応|ワイルドカード|
 |-|-|-|-|-|
 |21|ftp|FTP protocols|FTPBounce<br/>FTPSprint|#FTP_CRACK#<br/>#FTP_FAST_EXE#|
 |22|ssh|SSH protocols|SSHcrack|#SSH_CRACK#|
