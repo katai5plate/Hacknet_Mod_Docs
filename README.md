@@ -26,7 +26,9 @@
 ```
 
 Extensionsフォルダに入ったら、`BlankExtension`フォルダ全体を同フォルダにコピーし、
-好きな名前に変更しましょう。これでMODを新規作成することができます。
+好きな名前に変更しましょう。
+
+これでMODを新規作成することができます。
 
 そのフォルダを開き、その中にある
 `EDIT_ME_ExtensionInfo.xml`を`ExtensionInfo.xml`に名前を変更してください。
@@ -38,16 +40,78 @@ Extensionsフォルダに入ったら、`BlankExtension`フォルダ全体を同
 設定を変更しましょう。
 
 これが終わったら、エラーの有無を確認するため、検証テストを行います。
+
 Hacknetを開き、開発中のMODを選んだ先の画面に移動しましょう。
 そこに`Run verification tests`というボタンがあるので、クリックすることで確認することができます。
+
 このボタンを押すことに慣れておきましょう。
 
 これであなたはミッションとコンピュータを追加するための基礎を手に入れました！
+
 この先のガイドでは、あなたができる全てを伝授します。
 
+# ExtensionInfo.xml
 
+すべてのMODは、`ExtensionInfo.xml`というファイルを含む、
+決まった構成のフォルダを必要とします。
 
+このファイルはMODのメタデータを設定するために記述するものです。
 
+[サンプル](https://pastebin.com/6fc1fpJn)
 
+この内容をコピーし、自分のMODに合う設定に変更しましょう。
 
+# コンピュータの基本
 
+Hacknetのコンピュータはそれぞれ、単一のXMLファイルで定義されています。
+
+これにタグを追加・削除したり、値を変更したりすることで、
+機能やセキュリティなどが反映されます。
+
+[そのすべての機能を完全に記述された例はこちら](https://pastebin.com/NwtgTdPW)
+
+基礎となる開始タグは次のように記述します。
+
+```xml
+<Computer id="advExamplePC" 
+          name="Extension Example PC" 
+          ip="167.194.132.7"
+          security="2"
+          allowsDefaultBootModule="false"
+          icon="chip" 
+          type="1" > 
+```
+
+## security
+ハッキングの難易度を`0～5`の数値で表します。
+1～4までは、打開に多くのポートが必要になるでしょう。
+
+4以上であれば、簡単にスケールアップできるよう、
+他のセキュリティが自動追加されます。（推奨）
+
+## AllowsDefaultBootModule
+デフォルトで`true`になっています。
+ノードに接続すると自動的にプログラムを起動して
+ディスプレイモジュールに表示します。
+
+プログラムとは、このファイルの最後に定義されたデーモンのことです。
+
+## icon
+|||||
+|-|-|-|-|
+|**DEFAULT**||||
+|laptop|chip|kellis||
+|tablet|ePhone|ePhone2||
+|**LABYRINTHS**||||
+|Psylance|PacificAir|Alchemist||
+|DLCLaptop|DLCPC1|DLCPC2|DLCServer|
+
+- 未定義の場合、セキュリティレベルで設定されたデフォルトが使用されます。
+
+## type
+|value|description|
+|-|-|
+|1|企業(corporate)|
+|2|自宅(home)|
+|3|サーバー(server)|
+|4 / empty|空(empty)|
