@@ -156,16 +156,16 @@ Hacknetのコンピュータはそれぞれ、単一のXMLファイルで定義�
 <ports>21, 22, 25, 80, 1433, 104, 6881, 443, 192, 554</ports>
 ```
 
-|使用可能な番号|説明|対応|ワイルドカード|
+|番号|説明|対応|ワイルドカード|
 |-|-|-|-|
-|21|FTP protocols|FTPBounce / FTPSprint|#FTP_CRACK# / #FTP_FAST_EXE#|
+|21|FTP protocols|FTPBounce<br/>FTPSprint|#FTP_CRACK#<br/>#FTP_FAST_EXE#|
 |22|SSH protocols|SSHcrack|#SSH_CRACK#|
 |25|SMTP protocols|SMTPoverflow|#SMTP_CRACK#|
 |80|HTTP WebServer|WebServerWorm|#WEB_CRACK#|
-|1433|SQL Server|SQL_MemCorrupt / SQLBufferOverflow|#SQL_CRACK#|
-|104|Medical Services|KBT_PortTest / KBTPortTest|#MEDICAL_PROGRAM#|
-|6881|BitTorrent|TorrentStreamInjector / trnt|#TORRENT_EXE#|
-|443|HTTPS (SSL)|SSLTrojan / WIP_SSLTrojan|#SSL_EXE#|
+|1433|SQL Server|SQL_MemCorrupt<br/>SQLBufferOverflow|#SQL_CRACK#|
+|104|Medical Services|KBT_PortTest<br/>KBTPortTest|#MEDICAL_PROGRAM#|
+|6881|BitTorrent|TorrentStreamInjector<br/>trnt|#TORRENT_EXE#|
+|443|HTTPS (SSL)|SSLTrojan<br/>WIP_SSLTrojan|#SSL_EXE#|
 |192|Pacific Dedicated|PacificPortcrusher|#PACIFIC_EXE#|
 |554|RTSP|RTSPCrack|#RTSP_EXE#|
 
