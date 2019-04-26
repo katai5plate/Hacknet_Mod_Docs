@@ -156,7 +156,11 @@ Hacknetのコンピュータはそれぞれ、単一のXMLファイルで定義�
 <ports>21, 22, 25, 80, 1433, 104, 6881, 443, 192, 554</ports>
 ```
 
-|番号|再設定用<br/>略称|説明|対応|ワイルドカード|
+|番号|port<br/>Remap<br/>用```xml
+<file path="bin" name="RTSPCrack.exe">#RTSP_EXE#</file>
+<file path="bin" name="ESequencer.exe">#EXT_SEQUENCER_EXE#</file>
+<file path="bin" name="OpShell.exe">#SHELL_OPENER_EXE#</file>
+```略称|説明|対応|ワイルドカード|
 |-|-|-|-|-|
 |21|ftp|FTP protocols|FTPBounce<br/>FTPSprint|#FTP_CRACK#<br/>#FTP_FAST_EXE#|
 |22|ssh|SSH protocols|SSHcrack|#SSH_CRACK#|
@@ -231,17 +235,127 @@ disconnectした直後、自動でポートとスタッフをリセットしま�
 <tracker />
 ```
 
-## コンピュータのリンクと場所
+### 接続
 
-### 別のコンピュータとリンクする
+#### 別のコンピュータとリンクする
 
 scanしたとき、他のコンピュータを追加するようにします。
 
+- `target`: コンピュータ名
+
 ```xml
-<dlink target="advExamplePC2" />
+<dlink target="advExamplePC_1" />
+<dlink target="advExamplePC_2" />
+<dlink target="advExamplePC_3" />
 ```
 
-### 
+##### 位置の設定
+
+見栄えを良くするために、
+親コンピュータを中心に円をとり、子コンピュータを均等に配置します。
+
+- `position`: `total`のうちの位置インデックス
+- `total`: 親の周囲にいくつコンピュータを存在させるか
+- `extraDistance`: 半径。`-0.6～0.3`の範囲推奨。最適値は`0.1`。
+- `force`: 他のコンピュータと位置が重なっていても、強制的に配置します。
+
+```xml
+<dlink target="advExamplePC2" />
+<positionNear target="advExamplePC2" position="1" total="3" extraDistance="0.1" force="false"/>
+```
+
+### ファイル構成
+
+```xml
+<file path="home" name="Test_File.txt">これはホームディレクトリのテストファイルです。</file>
+```
+```xml
+<file path="home" name="asdf.txt">これは
+複数行
+ファイル。
+
+左側に空白が「ない」ことに注意してください。
+そうでないと、フォーマットの問題を引き起こします！</file>
+```
+```xml
+<file path="home" name="downloadFile.txt">これはExampleMission.xmlのいくつかの目的のためのファイルです。</file>
+```
+```xml
+<file path="home" name="changeFile.txt">これも！</file>
+```
+```xml
+<file path="bin" name="Binary_File">#BINARY#</file>
+```
+
+`#`で囲まれた`ワイルドカード`は、
+ロード時に特定の内容に自動置換されるものです。
+
+ワイルドカードの書式は常に Screaming snake case です。
+
+```xml
+<file path="home/NewDirectory" name="Test_File">
+これは、pathに何かを追加することによって新しいディレクトリを作成する大きなファイルです。
+
+    #BINARY#
+    2000文字のバイナリ文字列を返す
+    
+    #BINARYSMALL#
+    1000文字のバイナリ文字列を返す
+
+    #PLAYER_IP#
+    プレイヤーのIPの文字列を返す
+
+    #PLAYERNAME#
+    プレイヤーの名前の文字列を返す
+
+    #RANDOM_IP#
+    生成されたランダムなIPの文字列を返す
+
+    てすとてすと
+  </file>
+```
+```xml
+<file path="bin" name="SSHCrack.exe">#SSH_CRACK#</file>
+<file path="bin" name="FTPBounce.exe">#FTP_CRACK#</file>
+<file path="bin" name="WebServerWorm.exe">#WEB_CRACK#</file>
+<file path="bin" name="SMTPOverflow.exe">#SMTP_CRACK#</file>
+<file path="bin" name="SQLBufferOverflow.exe">#SQL_CRACK#</file>
+<file path="bin" name="HexClock.exe">#HEXCLOCK_EXE#</file>
+<file path="bin" name="Clock.exe">#CLOCK_PROGRAM#</file>
+<file path="bin" name="Decypher.exe">#DECYPHER_PROGRAM#</file>
+<file path="bin" name="DECHead.exe">#DECHEAD_PROGRAM#</file>
+<file path="bin" name="KBTPortTest.exe">#MEDICAL_PROGRAM#</file>
+<file path="bin" name="ThemeChanger.exe">#THEMECHANGER_EXE#</file>
+<file path="bin" name="eosDeviceScan.exe">#EOS_SCANNER_EXE#</file>
+<file path="bin" name="SecurityTracer.exe">#SECURITYTRACER_PROGRAM#</file>
+<file path="bin" name="Tracekill.exe">#TRACEKILL_EXE#</file>
+```
+
+#### MOD専用のプログラム
+
+- `RTSPCrack`: ポート554を解除
+- `ESequencer`: `ExtensionInfo.xml`によってカスタマイズ可能なプログラム
+- `OpShell`: 現在のシェル設定を保存し、あとで再展開。`-s``-o`のオプション。
+
+```xml
+<file path="bin" name="RTSPCrack.exe">#RTSP_EXE#</file>
+<file path="bin" name="ESequencer.exe">#EXT_SEQUENCER_EXE#</file>
+<file path="bin" name="OpShell.exe">#SHELL_OPENER_EXE#</file>
+```
+
+#### テーマ
+
+```xml
+<file path="sys" name="White-Theme.sys">#WHITE_THEME#</file>
+<file path="sys" name="Green-Theme.sys">#GREEN_THEME#</file>
+<file path="sys" name="Yellow-Theme.sys">#YELLOW_THEME#</file>
+<file path="sys" name="Teal-Theme.sys">#TEAL_THEME#</file>
+<file path="sys" name="Base-Theme.sys">#BASE_THEME#</file>
+<file path="sys" name="LE-Theme.sys">#PURPLE_THEME#</file>
+<file path="sys" name="Mint-Theme.sys">#MINT_THEME#</file>
+```
+
+
 
 
 
