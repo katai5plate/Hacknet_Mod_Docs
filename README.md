@@ -1,5 +1,7 @@
 # Hacknet Extensions Guide
 
+翻訳元: https://steamcommunity.com/sharedfiles/filedetails/?id=914587661
+
 ## はじめに
 
 まずはプリインストールされている`IntroExtension`を試してみることをお勧めします。
