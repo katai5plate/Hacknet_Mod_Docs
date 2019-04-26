@@ -36,7 +36,7 @@ Extensionsフォルダに入ったら、`BlankExtension`フォルダ全体を同
 これにより、Hacknetを開きし`Extensions`を選択すると、
 このMODが出現するようになります。（この時点では、`BlankExtension`として。）
 
-ここからは、[ExtensionInfo.xmlの章](#ExtensionInfo.xml)を参照し、
+ここからは、[ExtensionInfo.xmlの章](#extensioninfoxml)を参照し、
 設定を変更しましょう。
 
 これが終わったら、エラーの有無を確認するため、検証テストを行います。
@@ -83,6 +83,7 @@ Hacknetのコンピュータはそれぞれ、単一のXMLファイルで定義�
 ```
 
 ## security
+
 ハッキングの難易度を`0～5`の数値で表します。
 1～4までは、打開に多くのポートが必要になるでしょう。
 
@@ -90,6 +91,7 @@ Hacknetのコンピュータはそれぞれ、単一のXMLファイルで定義�
 他のセキュリティが自動追加されます。（推奨）
 
 ## AllowsDefaultBootModule
+
 デフォルトで`true`になっています。
 ノードに接続すると自動的にプログラムを起動して
 ディスプレイモジュールに表示します。
@@ -97,6 +99,7 @@ Hacknetのコンピュータはそれぞれ、単一のXMLファイルで定義�
 プログラムとは、このファイルの最後に定義されたデーモンのことです。
 
 ## icon
+
 |||||
 |-|-|-|-|
 |**DEFAULT**||||
@@ -109,9 +112,73 @@ Hacknetのコンピュータはそれぞれ、単一のXMLファイルで定義�
 - 未定義の場合、セキュリティレベルで設定されたデフォルトが使用されます。
 
 ## type
-|value|description|
+
+|値|説明|
 |-|-|
 |1|企業(corporate)|
 |2|自宅(home)|
 |3|サーバー(server)|
 |4 / empty|空(empty)|
+
+# セキュリティ
+
+これらのタグをコンピュータファイルに追加することで、
+セキュリティ機能を記述できます。
+
+## アカウント
+
+### 管理者パスワードの設定
+
+```xml
+<adminPass pass="password" />
+```
+
+### アカウント追加
+
+```xml
+<account username="Matt" password="testpass" type="ALL" />
+```
+
+#### type
+
+|値|説明|
+|-|-|
+|0 / ADMIN||
+|1 / ALL|ファイルの削除が可能|
+|2 / MAIL|メールアカウント専用|
+|3 / MISSIONLIST|ミッションリストアカウント専用|
+
+## セキュリティ
+
+### ポートの設定
+
+```xml
+<ports>21, 22, 25, 80, 1433, 104, 6881, 443, 192, 554</ports>
+```
+
+|使用可能な番号|説明|対応|ワイルドカード|
+|-|-|-|-|
+|21|FTP protocols|FTPBounce / FTPSprint|#FTP_CRACK# / #FTP_FAST_EXE#|
+|22|SSH protocols|SSHcrack|#SSH_CRACK#|
+|25|SMTP protocols|SMTPoverflow|#SMTP_CRACK#|
+|80|HTTP WebServer|WebServerWorm|#WEB_CRACK#|
+|1433|SQL Server|SQL_MemCorrupt / SQLBufferOverflow|#SQL_CRACK#|
+|104|Medical Services|KBT_PortTest / KBTPortTest|#MEDICAL_PROGRAM#|
+|6881|BitTorrent|TorrentStreamInjector / trnt|#TORRENT_EXE#|
+|443|HTTPS (SSL)|SSLTrojan / WIP_SSLTrojan|#SSL_EXE#|
+|192|Pacific Dedicated|PacificPortcrusher|#PACIFIC_EXE#|
+|554|RTSP|RTSPCrack|#RTSP_EXE#|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
