@@ -506,9 +506,10 @@ but it is much more efficient at doing that than other servers.
 If you have lots of actions looping or in delay at once (more than 50, say) it might be worth moving them to be delay hosted on one of these if you encounter performance issues.
 
 If you're going to use this, make sure this tag is the first one under the <Computer> tag!
-          
-          
 
+```xml
+<FastActionHost />
+```
 
 
 
