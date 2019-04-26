@@ -13,9 +13,9 @@
 
 主な参考ファイルは次のとおりです。
 
-- [Computer](https://pastebin.com/NwtgTdPW)
-- [Mission](https://pastebin.com/WtFLbQvH)
-- [Faction/Actions](https://pastebin.com/n3i1faEe)
+- [Computer](https://github.com/katai5plate/Hacknet_Mod_Docs/blob/master/Computer.xml)
+- [Mission](https://github.com/katai5plate/Hacknet_Mod_Docs/blob/master/Mission.xml)
+- [Faction/Actions](https://github.com/katai5plate/Hacknet_Mod_Docs/blob/master/FactionAndActions.xml)
 
 ## Getting started
 
@@ -57,7 +57,7 @@ Hacknetを開き、開発中のMODを選んだ先の画面に移動しましょ�
 
 このファイルはMODのメタデータを設定するために記述するものです。
 
-[サンプル](https://pastebin.com/6fc1fpJn)
+[サンプル](https://github.com/katai5plate/Hacknet_Mod_Docs/blob/master/ExtensionInfo.xml)
 
 この内容をコピーし、自分のMODに合う設定に変更しましょう。
 
