@@ -513,7 +513,257 @@ If you're going to use this, make sure this tag is the first one under the <Comp
 <FastActionHost />
 ```
 
+### eOSデバイス (翻訳中)
 
+```xml
+<eosDevice name="Deliliah's ePhone 4S" id="eosIntroPhone" icon="ePhone2" empty="true" passOverride="notAlpine">
+    <note>TestNote
+More text</note>
+    <note>Note filenames
+Note filenames are generated automatically by taking the first line of the file
+(in this case "Note Filenames") and replacing spaces with underscores.</note>
+    <mail username="test@jmail.com" pass="thisIstheaccountpass" />
+    <mail username="test2@jmail.com" pass="YouCanHaveLotsOfThese" />
+    <file path="eos/test" name="crackedFile.txt">This is mostly useful for jailbroken phones</file>
+  </eosDevice>
+```
 
+Adding this section will create a second computer on load, attached to this which is an eos device, all set up, with these files on it. It'll also automatically generate some apps and save files and things for flavor.
 
+You can have more than one eOS device per computer!
+
+Note: The above code must be added Inside of the <Computer> tags! It's described as a part of a computer, and gets split out into it's own thing when this file is loaded in.
+
+For example, a very simple computer with an eOS device might look like this:
+
+```xml
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<Computer id="eosTestComp"
+     name="eOS Host Computer" 
+     security="3" >
+
+    <eosDevice name="testePhone" id="testePhone" icon="ePhone2" >
+        <note>TestNote</note>
+        <mail username="test@jmail.com" pass="thisIstheaccountpass" />
+  </eosDevice>
+
+</Computer>
+```
+
+### Labyrinths専用要素: コンピュータ (翻訳中)
+
+The following Computer features require Labyrinths to work.
+
+```xml
+  <Memory>
+    <Commands>
+      <Command>cd /log</Command>
+      <Command>rm *.log</Command>
+      <Command>cd /log</Command>
+      <Command>rm *.log</Command>
+    </Commands>
+    <Data>
+      <Block>This appears in the "files" section</Block>
+      <Block>
+        more
+        and longer, multi line notes!
+        !
+        asdf
+      </Block>
+    </Data>
+    <Images>
+      <Image>Images/ExampleImage.png</Image>
+    </Images>
+  </Memory>
+```
+
+This is the memory that will be turned into a memory dump using MemDumpGenerator.exe
+
+```xml
+  <memoryDumpFile name="testDump.md" path="home">
+    <Memory>
+      <Data>
+        <Block>test string one</Block>
+        <Block>test string two</Block>
+      </Data>
+      <Commands>
+        <Command>connect 123.123.123.123</Command>
+      </Commands>
+      <Data>
+        <Block>1234432</Block>
+        <Block>gfdgfdgdf</Block>
+        <Block>asdf</Block>
+      </Data>
+    </Memory>
+  </memoryDumpFile>
+```
+
+Memory dump file - this can be downloaded and analyzed with MemForensics.exe
+
+### Labyrinths専用要素: デーモン (翻訳中)
+
+```xml
+ <DHSDaemon groupName="NewFaction Hub" addsFactionPointOnMissionComplete="true" autoClearMissionsOnPlayerComplete="true" themeColor="255, 255, 161" allowContractAbbandon="false">
+    <agent name="Tyson" pass="rockemsockem" color="209,74,48"/>
+    <agent name="DependableSkeleton" pass="d832n3msad" color="112,198,255"/>
+    <agent name="HA0" pass="kolgateryu" color="58,202,146"/>
+  </DHSDaemon>
+```
+
+Creates a bibliotheque (DLC IRC server) style message board. Can be used to inject missions and messages into via the faction system.
+
+```xml
+<CustomConnectDisplayDaemon />
+```
+
+Changes the default connect display to look like the one the "ricer" had in Labyrinths
+
+```xml
+<LogoDaemon Name="Logo Display Test" ShowsTitle="true" TextColor="0, 220, 220, 200" LogoImagePath="Logo.png">
+Lines
+Here
+Appear under
+The Logo
+  </LogoDaemon>
+```
+
+Displays a big logo on the front of the server with optional messages underneath. If you do not provide a logo image path, it'll display a fancy loading spinner instead.
+
+```xml
+<LogoCustomConnectDisplayDaemon logo="Logo.png" title="Logo.png" overdrawLogo="true" buttonAlignment="left" />
+```
+
+Custom connect display with a nameplate logo and title image like PacificAir had in Labyrinths.
+Button alignment can be "left" "middle" or "right"
+
+```xml
+<IRCDaemon themeColor="67,204,148" name="Misc IRC Channel" needsLogin="false">
+    <user name="Vegas" color="0,209,232"/>
+    <user name="bprm" color="202,98,0"/>
+    <user name="Care_ey" color="0,196,82"/>
+
+    <post user="Vegas">Post IRC Messages here!</post>
+    <post user="bprm">dont forget to set the users</post>
+    <post user="Care_ey">Yep, this can also be used in the faction scripts to add messages etc to.</post>
+    <post user="Vegas">That's so cool!</post>
+  </IRCDaemon>
+```
+
+Creates an IRC daemon (without missions etc - just the chat). This can be dynamically added to later with Actions!
+
+#### Whitelist Servers
+
+Whitelist servers are kind of tricky. This same tag can mean that this server checks against a remote whitelist to see who to let on, or that it itself is that whitelist server. This can be a bit confusing, so i'm just going to outline a few of the cases here:
+
+```xml
+<WhitelistAuthenticatorDaemon SelfAuthenticating="false" />
+```
+
+This is your basic whitelist server "host" type - it wont check incoming connection to itself against it's list. It only serves a protective function against *other* servers.
+
+```xml
+<WhitelistAuthenticatorDaemon Remote="RemoteServerID"/>
+```
+
+This one connects to a remote host and checks against that host's whitelist.
+
+```xml
+<WhitelistAuthenticatorDaemon SelfAuthenticating="true"/>
+```
+
+This one protects itself against all connections not on the list. Generally "unbreakable" without scripts.
+
+#### Databases
+
+```xml
+<DatabaseDaemon Permissions="private" DataType="GitCommitEntry" Foldername="database" Color="85,0,150" AdminEmailAccount="Matt@TestExtensionMail.com" AdminEmailHostID="advExamplePC" Name="Test database">
+
+    <GitCommitEntry>
+      <EntryNumber>8613</EntryNumber>
+      <ChangedFiles>
+        <String>Neopals.php</String>
+      </ChangedFiles>
+      <Message>Reverted Minor updates because it broke everything</Message>
+      <UserName>T.Champer</UserName>
+      <SourceIP>192.168.1.1 (Localhost)</SourceIP>
+    </GitCommitEntry>
+    
+    <GitCommitEntry>
+      <EntryNumber>8611</EntryNumber>
+      <ChangedFiles>
+        <String>Content.pak</String>
+      </ChangedFiles>
+      <Message>REMOTE COMMIT: Decreased pelvis bulge on Sparkle costume set :(</Message>
+      <UserName>A.Wallin</UserName>
+      <SourceIP>54.192.234.65</SourceIP>
+    </GitCommitEntry>
+  
+  </DatabaseDaemon>
+```
+
+Database daemons display a list of records of any datatype in Hacknet. Providing no datatype will give the "API Access" screen like Pacific air had.
+
+```
+Current Datatypes:
+*all basic C# datatypes from .NET*
+Everything in the Hacknet codebase
+
+Easy templated ones below:
+
+Git Commit entry, as seen sbove
+
+"TextRecord"
+<TextRecord>
+<Title>Record Title</Title>
+<Data>Body Data</Data>
+</TextRecord>
+
+"OnlineAccount"
+<OnlineAccount>
+<ID>1234</ID>
+<Username>asdf</Username>
+<BanStatus>very yes</BanStatus>
+<Notes>notes here</Notes>
+</OnlineAccount>
+
+"CAROData"
+UserID
+Headshots
+Kills
+Rank
+Crowbars
+InventoryID
+BanStatus
+
+"Account"
+string ID;
+string Cash;
+string Bank;
+string Apartments;
+string Vehicles;
+string PegasusVehicles;
+string Rank;
+string RP;
+string Kills;
+```
+
+### Labyrinths専用要素: プログラム (翻訳中)
+
+Labyrinths Programs
+
+```xml
+<file path="bin" name="TorrentStreamInjector.exe">#TORRENT_EXE#</file>
+<file path="bin" name="SSLTrojan.exe">#SSL_EXE#</file>
+<file path="bin" name="FTPSprint.exe">#FTP_FAST_EXE#</file>
+<file path="bin" name="SignalScramble.exe">#SIGNAL_SCRAMBLER_EXE#</file>
+<file path="bin" name="MemForensics.exe">#MEM_FORENSICS_EXE#</file>
+<file path="bin" name="MemDumpGenerator.exe">#MEM_DUMP_GENERATOR#</file>
+<file path="bin" name="PacificPortcrusher.exe">#PACIFIC_EXE#</file>
+<file path="bin" name="NetmapOrganizer.exe">#NETMAP_ORGANIZER_EXE#</file>
+<file path="bin" name="ComShell.exe">#SHELL_CONTROLLER_EXE#</file>
+<file path="bin" name="DNotes.exe">#NOTES_DUMPER_EXE#</file>
+<file path="bin" name="Tuneswap.exe">#DLC_MUSIC_EXE#</file>
+```
+
+## ミッションの基本
 
