@@ -1,6 +1,13 @@
 # Hacknet Extensions Guide
 
-翻訳元: https://steamcommunity.com/sharedfiles/filedetails/?id=914587661
+## 翻訳元
+https://steamcommunity.com/sharedfiles/filedetails/?id=914587661
+
+## コントリビュート募集中
+- 翻訳を手伝っていただける人を募集中です。
+- 協力していただける方は、このプロジェクトを fork し、プルリクエストを送ってください。
+
+# 以下翻訳
 
 ## はじめに
 
