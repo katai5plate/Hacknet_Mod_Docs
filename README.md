@@ -504,7 +504,9 @@ CSEC風:
 <CreditsDaemon Title="intro Extension Ending Credits" ButtonText="Complete" ConditionalActionSetToRunOnButtonPressPath="Actions/CreditsRunActions.xml"/>
 ```
 
-#### FastActionHost (翻訳中)
+# ここから先翻訳中
+
+#### FastActionHost
 
 An optimized Action host daemon
 
@@ -520,7 +522,7 @@ If you're going to use this, make sure this tag is the first one under the <Comp
 <FastActionHost />
 ```
 
-### eOSデバイス (翻訳中)
+### eOSデバイス
 
 ```xml
 <eosDevice name="Deliliah's ePhone 4S" id="eosIntroPhone" icon="ePhone2" empty="true" passOverride="notAlpine">
@@ -557,7 +559,7 @@ For example, a very simple computer with an eOS device might look like this:
 </Computer>
 ```
 
-### Labyrinths専用要素: コンピュータ (翻訳中)
+### Labyrinths専用要素: コンピュータ
 
 The following Computer features require Labyrinths to work.
 
@@ -607,7 +609,7 @@ This is the memory that will be turned into a memory dump using MemDumpGenerator
 
 Memory dump file - this can be downloaded and analyzed with MemForensics.exe
 
-### Labyrinths専用要素: デーモン (翻訳中)
+### Labyrinths専用要素: デーモン
 
 ```xml
  <DHSDaemon groupName="NewFaction Hub" addsFactionPointOnMissionComplete="true" autoClearMissionsOnPlayerComplete="true" themeColor="255, 255, 161" allowContractAbbandon="false">
